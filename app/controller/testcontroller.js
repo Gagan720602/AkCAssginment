@@ -1,4 +1,7 @@
-import { insertservice,selectservice ,bookService } from "../service/testservice.js";
+import { insertservice,selectservice ,bookService ,deleteService} from "../service/testservice.js";
+
+
+//==================================================================get api function========================================//
 export const selectController = async(ctx) => {
 
     try{
@@ -12,7 +15,7 @@ export const selectController = async(ctx) => {
       ctx.body = { success : false, message: e.message };
     }
   }
-
+//==================================================================create api function========================================//
   export const insertController = async(ctx) => {
 
     try{
@@ -41,7 +44,7 @@ export const selectController = async(ctx) => {
       ctx.body = { success : false, message: e.message };
     }
   }
-
+//==================================================================update api function========================================//
   export const bookit= async(ctx) =>{
     try{
       const params = ctx.request.body;
@@ -50,6 +53,24 @@ export const selectController = async(ctx) => {
       const seat =params.seat
 
       const response =await bookService(bus,seat)
+      ctx.status = 200;
+      ctx.body = response;
+    }
+    catch(e){
+        console.log(e.message)
+        ctx.status = 500;
+        ctx.body = { success : false, message: e.message };
+    }
+  }
+//==================================================================delete api function========================================//
+  export const deleapi= async(ctx) =>{
+    try{
+      const params = ctx.request.body;
+
+        console.log('bus number',params.num)
+
+      const num= params.num
+      const response =await deleteService(num)
       ctx.status = 200;
       ctx.body = response;
     }
