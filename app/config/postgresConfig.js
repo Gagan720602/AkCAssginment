@@ -1,0 +1,1 @@
+export const psqlConfig = 'postgres://postgres:tiger@127.0.0.1:5432/bus';
