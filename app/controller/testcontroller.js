@@ -1,4 +1,4 @@
-import { insertservice,selectservice } from "../service/testservice.js";
+import { insertservice,selectservice ,bookService } from "../service/testservice.js";
 export const selectController = async(ctx) => {
 
     try{
@@ -41,4 +41,23 @@ export const selectController = async(ctx) => {
       ctx.body = { success : false, message: e.message };
     }
   }
+
+  export const bookit= async(ctx) =>{
+    try{
+      const params = ctx.request.body;
+        console.log('book',params)
+      const bus= params.bus
+      const seat =params.seat
+
+      const response =await bookService(bus,seat)
+      ctx.status = 200;
+      ctx.body = response;
+    }
+    catch(e){
+        console.log(e.message)
+        ctx.status = 500;
+        ctx.body = { success : false, message: e.message };
+    }
+  }
+
 
